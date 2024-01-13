@@ -18,9 +18,9 @@ ITEM_DESCRIPTIONS = [
 def create_table():
     conn = mysql.connector.connect(
         host="mysql-c7ms",
-        user="root",
-        password="Arqum@db0336",
-        database="inventorydb"
+        user="mysql",
+        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
+        database="mysql"
     )
     cursor = conn.cursor()
 
@@ -44,9 +44,9 @@ def create_table():
 def insert_item(user_name, department, item_description, issued_date, crf_number, remarks):
     conn = mysql.connector.connect(
         host="mysql-c7ms",
-        user="root",
-        password="Arqum@db0336",
-        database="inventorydb"
+        user="mysql",
+        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
+        database="mysql"
     )
     cursor = conn.cursor()
 
@@ -62,9 +62,9 @@ def insert_item(user_name, department, item_description, issued_date, crf_number
 def get_all_items():
     conn = mysql.connector.connect(
         host="mysql-c7ms",
-        user="root",
-        password="Arqum@db0336",
-        database="inventorydb"
+        user="mysql",
+        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
+        database="mysql"
     )
     cursor = conn.cursor()
 
@@ -79,9 +79,9 @@ def get_all_items():
 def update_item(item_id, user_name, department, item_description, issued_date, crf_number, remarks):
     conn = mysql.connector.connect(
         host="mysql-c7ms",
-        user="root",
-        password="Arqum@db0336",
-        database="inventorydb"
+        user="mysql",
+        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
+        database="mysql"
     )
     cursor = conn.cursor()
 
@@ -98,9 +98,9 @@ def update_item(item_id, user_name, department, item_description, issued_date, c
 def delete_item(item_id):
     conn = mysql.connector.connect(
         host="mysql-c7ms",
-        user="root",
-        password="Arqum@db0336",
-        database="inventorydb"
+        user="mysql",
+        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
+        database="mysql"
     )
     cursor = conn.cursor()
 

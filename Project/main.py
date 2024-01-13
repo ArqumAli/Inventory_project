@@ -17,10 +17,10 @@ ITEM_DESCRIPTIONS = [
 # Function to initialize the MySQL database
 def create_table():
     conn = mysql.connector.connect(
-        host="mysql-c7ms",
-        user="mysql",
-        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
-        database="mysql"
+        host="bsczlo8zvmuntqf47mmy-mysql.services.clever-cloud.com",
+        user="ubqvdqafuaqzngxx",
+        password="b9LtLbDicFqu2P3WX07K",
+        database="bsczlo8zvmuntqf47mmy"
     )
     cursor = conn.cursor()
 
@@ -43,10 +43,10 @@ def create_table():
 # Function to insert an item into the MySQL database
 def insert_item(user_name, department, item_description, issued_date, crf_number, remarks):
     conn = mysql.connector.connect(
-        host="mysql-c7ms",
-        user="mysql",
-        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
-        database="mysql"
+        host="bsczlo8zvmuntqf47mmy-mysql.services.clever-cloud.com",
+        user="ubqvdqafuaqzngxx",
+        password="b9LtLbDicFqu2P3WX07K",
+        database="bsczlo8zvmuntqf47mmy"
     )
     cursor = conn.cursor()
 
@@ -61,10 +61,10 @@ def insert_item(user_name, department, item_description, issued_date, crf_number
 # Function to retrieve all items from the MySQL database
 def get_all_items():
     conn = mysql.connector.connect(
-        host="mysql-c7ms",
-        user="mysql",
-        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
-        database="mysql"
+        host="bsczlo8zvmuntqf47mmy-mysql.services.clever-cloud.com",
+        user="ubqvdqafuaqzngxx",
+        password="b9LtLbDicFqu2P3WX07K",
+        database="bsczlo8zvmuntqf47mmy"
     )
     cursor = conn.cursor()
 
@@ -78,10 +78,10 @@ def get_all_items():
 # Function to update an existing item in the MySQL database
 def update_item(item_id, user_name, department, item_description, issued_date, crf_number, remarks):
     conn = mysql.connector.connect(
-        host="mysql-c7ms",
-        user="mysql",
-        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
-        database="mysql"
+        host="bsczlo8zvmuntqf47mmy-mysql.services.clever-cloud.com",
+        user="ubqvdqafuaqzngxx",
+        password="b9LtLbDicFqu2P3WX07K",
+        database="bsczlo8zvmuntqf47mmy"
     )
     cursor = conn.cursor()
 
@@ -97,10 +97,10 @@ def update_item(item_id, user_name, department, item_description, issued_date, c
 # Function to delete an existing item from the MySQL database
 def delete_item(item_id):
     conn = mysql.connector.connect(
-        host="mysql-c7ms",
-        user="mysql",
-        password="f38u/YV3vsE59ivWyY9jfvb6n+1lfzt8RBwQGzBcsYM=",
-        database="mysql"
+        host="bsczlo8zvmuntqf47mmy-mysql.services.clever-cloud.com",
+        user="ubqvdqafuaqzngxx",
+        password="b9LtLbDicFqu2P3WX07K",
+        database="bsczlo8zvmuntqf47mmy"
     )
     cursor = conn.cursor()
 

@@ -144,6 +144,16 @@ def main():
             )
             st.success(f'Entry "{item_crf_number}" added successfully!')
 
+     # Clear input fields after saving
+            
+            item_name = ""
+            item_department = ""
+            item_description = []
+            item_issued_date = datetime.today()
+            item_crf_number = ""
+            item_remarks = ""
+
+
     elif option == 'View All Entries':
         st.header('Entry List')
         # Retrieve and display all items

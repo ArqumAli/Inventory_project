@@ -14,6 +14,13 @@ ITEM_DESCRIPTIONS = [
     "Mouse", "Keyboard", "Ethernet Cable", "Power Cable", "Laptop Charger", "Telephone Cable",
 ]
 
+st.set_page_config(
+    page_title="Non Asset Item Inventory",
+    page_icon="📦",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 # Function to initialize the MySQL database
 def create_table():
     conn = mysql.connector.connect(
@@ -147,8 +154,7 @@ def main():
                 columns=['ID', 'User Name', 'Department', 'Item Description', 'Issued Date', 'CRF Number', 'Remarks']
             )
             st.dataframe(df.style.set_properties(**{'max-height': '700px', 'overflow-y': 'auto'}).set_table_styles([{'selector': 'th', 'props': [('font-size', '30px'), ('font-weight', 'bold')]}]))
-            # Hide the index column
-            st.dataframe(df.style.hide())
+            
         else:
             st.info('No entries in the table.')
 

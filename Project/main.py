@@ -124,8 +124,8 @@ def main():
     if option == 'Create New Entry':
         st.header('Add New Entry')
         item_name = st.text_input('User Name')
-        item_department = st.selectbox('Department', DEPARTMENTS)
-        item_description = st.multiselect('Item Description', ITEM_DESCRIPTIONS, index=None)
+        item_department = st.selectbox('Department', DEPARTMENTS, index=None)
+        item_description = st.multiselect('Item Description', ITEM_DESCRIPTIONS)
         item_issued_date = st.date_input('Issued Date', datetime.today())
         item_crf_number = st.text_input('CRF Number')
         item_remarks = st.text_area('Remarks')
@@ -148,7 +148,7 @@ def main():
             )
             st.dataframe(df.style.set_properties(**{'max-height': '700px', 'overflow-y': 'auto'}).set_table_styles([{'selector': 'th', 'props': [('font-size', '30px'), ('font-weight', 'bold')]}]))
             # Hide the index column
-            st.dataframe(df.style.hide_index())
+            st.dataframe(df.style.hide())
         else:
             st.info('No entries in the table.')
 

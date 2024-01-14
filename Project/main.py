@@ -75,8 +75,8 @@ def get_all_items():
 
     return items
 
-# Function to update an existing item in the MySQL database
-def update_item(item_id, user_name, department, item_description, issued_date, crf_number, remarks):
+# Function to update an existing item in the MySQL database usinf CRF number
+def update_item_by_crf(crf_number, user_name, department, item_description, issued_date, remarks):
     conn = mysql.connector.connect(
         host="bsczlo8zvmuntqf47mmy-mysql.services.clever-cloud.com",
         user="ubqvdqafuaqzngxx",
@@ -87,15 +87,15 @@ def update_item(item_id, user_name, department, item_description, issued_date, c
 
     cursor.execute('''
         UPDATE inventorytable
-        SET user_name=%s, department=%s, item_description=%s, issued_date=%s, crf_number=%s, remarks=%s
-        WHERE id=%s
-    ''', (user_name, department, item_description, issued_date, crf_number, remarks, item_id))
+        SET user_name=%s, department=%s, item_description=%s, issued_date=%s, remarks=%s
+        WHERE crf_number=%s
+    ''', (user_name, department, item_description, issued_date, remarks, crf_number))
 
     conn.commit()
     conn.close()
 
-# Function to delete an existing item from the MySQL database
-def delete_item(item_id):
+# Function to delete an existing item from the MySQL database using CRF number
+def delete_item_by_crf(crf_number):
     conn = mysql.connector.connect(
         host="bsczlo8zvmuntqf47mmy-mysql.services.clever-cloud.com",
         user="ubqvdqafuaqzngxx",
@@ -104,12 +104,12 @@ def delete_item(item_id):
     )
     cursor = conn.cursor()
 
-    cursor.execute('DELETE FROM inventorytable WHERE id=%s', (item_id,))
+    cursor.execute('DELETE FROM inventorytable WHERE crf_number=%s', (crf_number,))
     cursor.execute('ALTER TABLE inventorytable AUTO_INCREMENT = 1')
 
     conn.commit()
     conn.close()
-
+    
 # Main function to run the Streamlit app
 def main():
     st.title('Non Asset Item Inventory')
@@ -155,31 +155,30 @@ def main():
         # Retrieve and display all items for selection
         items = get_all_items()
         if items:
-            item_dict = {item[0]: item[1] for item in items}
-            selected_item = st.selectbox('Select Entry to Update', list(item_dict.values()))
-            selected_item_id = next((key for key, value in item_dict.items() if value == selected_item), None)
+            item_dict = {item[5]: item[1] for item in items}  # Using CRF number as the key
+            selected_item_crf = st.selectbox('Select Entry to Update', list(item_dict.keys()))
+            selected_item = item_dict[selected_item_crf]
 
             st.subheader(f"Selected Entry: {selected_item}")
-            #st.write(f"Entry ID: {selected_item_id}")
+            st.write(f"CRF Number: {selected_item_crf}")
 
             item_name = st.text_input('User Name', selected_item)
             item_department = st.selectbox('Department', DEPARTMENTS)
             item_description = st.multiselect('Item Description', ITEM_DESCRIPTIONS)
             item_issued_date = st.date_input('Issued Date', datetime.today())
-            item_crf_number = st.text_input('CRF Number')
             item_remarks = st.text_area('Remarks')
 
             if st.button('Update Item'):
-                update_item(
-                    selected_item_id, item_name, item_department, ', '.join(item_description),
-                    item_issued_date.strftime('%Y-%m-%d'), item_crf_number, item_remarks
+                update_item_by_crf(
+                    selected_item_crf, item_name, item_department,
+                    ', '.join(item_description), item_issued_date, item_remarks
                 )
-                st.success(f'Entry "{selected_item}" updated successfully!')
+                st.success(f'Entry with CRF Number "{selected_item_crf}" updated successfully!')
 
         else:
             st.info('No entries in the table.')
-
-    elif option == 'Delete Existing Entry':
+            
+   elif option == 'Delete Existing Entry':
         st.header('Delete Existing Entry')
         # Retrieve and display all items in a table for selection
         items = get_all_items()
@@ -193,17 +192,17 @@ def main():
             df.style.set_properties(**{'width': '400px'}, subset=['Issued Date'])
 
             st.subheader('Select Entry to Delete:')
-            selected_item_id = st.selectbox('', df['ID'].tolist())
-            selected_item = df[df['ID'] == selected_item_id].squeeze()
+            selected_item_crf = st.selectbox('', df['CRF Number'].tolist())
+            selected_item = df[df['CRF Number'] == selected_item_crf].squeeze()
 
             st.table(pd.DataFrame(selected_item).T)
 
             if st.button('Delete Entry'):
-                delete_item(selected_item_id)
-                st.success(f'Entry "{selected_item["User Name"]}" deleted successfully!')
+                delete_item_by_crf(selected_item_crf)
+                st.success(f'Entry with CRF Number "{selected_item_crf}" deleted successfully!')
 
         else:
             st.info('No entries in the table.')
-
+            
 if __name__ == '__main__':
     main()

@@ -125,7 +125,7 @@ def main():
         st.header('Add New Entry')
         item_name = st.text_input('User Name')
         item_department = st.selectbox('Department', DEPARTMENTS)
-        item_description = st.multiselect('Item Description', ITEM_DESCRIPTIONS)
+        item_description = st.multiselect('Item Description', ITEM_DESCRIPTIONS, index=None)
         item_issued_date = st.date_input('Issued Date', datetime.today())
         item_crf_number = st.text_input('CRF Number')
         item_remarks = st.text_area('Remarks')
@@ -135,7 +135,7 @@ def main():
                 item_name, item_department, ', '.join(item_description),
                 item_issued_date.strftime('%Y-%m-%d'), item_crf_number, item_remarks
             )
-            st.success(f'Entry "{item_name}" added successfully!')
+            st.success(f'Entry "{item_crf_number}" added successfully!')
 
     elif option == 'View All Entries':
         st.header('Entry List')
@@ -147,6 +147,8 @@ def main():
                 columns=['ID', 'User Name', 'Department', 'Item Description', 'Issued Date', 'CRF Number', 'Remarks']
             )
             st.dataframe(df.style.set_properties(**{'max-height': '700px', 'overflow-y': 'auto'}).set_table_styles([{'selector': 'th', 'props': [('font-size', '30px'), ('font-weight', 'bold')]}]))
+            # Hide the index column
+            st.dataframe(df.style.hide_index())
         else:
             st.info('No entries in the table.')
 
@@ -159,8 +161,8 @@ def main():
             selected_item_crf = st.selectbox('Select Entry to Update', list(item_dict.keys()))
             selected_item = item_dict[selected_item_crf]
 
-            st.subheader(f"Selected Entry: {selected_item}")
-            st.write(f"CRF Number: {selected_item_crf}")
+            st.subheader(f"Selected Entry: {selected_item_crf}")
+            #st.write(f"CRF Number: {selected_item_crf}")
 
             item_name = st.text_input('User Name', selected_item)
             item_department = st.selectbox('Department', DEPARTMENTS)

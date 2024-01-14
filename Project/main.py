@@ -200,7 +200,7 @@ def main():
 
             if st.button('Delete Entry'):
                 delete_item(selected_item_id)
-                st.success(f'Entry "{selected_item["Name"]}" deleted successfully!')
+                st.success(f'Entry "{selected_item["User Name"]}" deleted successfully!')
 
         else:
             st.info('No entries in the table.')

@@ -20,6 +20,20 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+st.markdown(
+    """
+    <style>
+        body {
+            color: #1E1E1E;  /* Font color */
+            background-color: #F2F2F2;  /* Background color */
+        }
+        .css-1v3fvcr {
+            color: #940E0C;  /* Font color for the sidebar */
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Function to initialize the MySQL database
 def create_table():

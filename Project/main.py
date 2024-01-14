@@ -178,7 +178,7 @@ def main():
         else:
             st.info('No entries in the table.')
             
-   elif option == 'Delete Existing Entry':
+    elif option == 'Delete Existing Entry':
         st.header('Delete Existing Entry')
         # Retrieve and display all items in a table for selection
         items = get_all_items()

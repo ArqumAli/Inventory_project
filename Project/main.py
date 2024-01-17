@@ -200,7 +200,7 @@ def main():
             item_issued_date = st.date_input('Issued Date', datetime.today())
             item_remarks = st.text_area('Remarks')
 
-            if st.button('Update Item'):
+            if st.button('Update Entry'):
                 update_item_by_crf(
                     selected_item_crf, item_name, item_department,
                     ', '.join(item_description), item_issued_date, item_remarks
